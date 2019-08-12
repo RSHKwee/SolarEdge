@@ -1,0 +1,7 @@
+De API key is:  ZSFYC1HPDSUXQH6KCDKSUJTFDGW884LE
+
+De site ID is 62137
+
+
+https://monitoringapi.solaredge.com/sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC&api_key=ZSFYC1HPDSUXQH6KCDKSUJTFDGW884LE
+

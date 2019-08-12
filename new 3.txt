@@ -1,0 +1,107 @@
+package dataTypen;
+
+import java.util.ArrayList;
+
+public class Sites {
+public class Site {
+private Integer id;
+private String notes;
+private String installationDate;
+private String type;
+private Integer accountId;
+private String ptoDate;
+private String name;
+private String currency;
+private Double peakPower;
+private String status;
+private String lastUpdateTime;
+
+private Uris uris;
+private PublicSettings publicSettings;
+private PrimaryModule primaryModule;
+private Location location;
+
+public Site(
+@JsonProperty("ïd") Integer id,
+@JsonProperty("notes") String notes,
+@JsonProperty("installationDate") String installationDate,
+@JsonProperty("type") String type,
+@JsonProperty("accountId") Integer accountId,
+@JsonProperty("ptoDate") String ptoDate,
+@JsonProperty("name") String name,
+@JsonProperty("currency") String currency,
+@JsonProperty("peakPower") Double peakPower,
+@JsonProperty("status") String status,
+@JsonProperty("lastUpdateTime") String lastUpdateTime,
+
+@JsonProperty("uris") Uris uris,
+@JsonProperty("publicSettings") PublicSettings publicSettings,
+@JsonProperty("primaryModule") PrimaryModule primaryModule,
+@JsonProperty("location") Location location) {
+          this.id=id;
+this.notes=notes;
+this.installationDate=installationDate;
+this.type=type;
+this.accountId=accountId;
+this.ptoDate=ptoDate;
+this.name=name;
+this.currency=currency;
+this.peakPower=peakPower;
+this.status=status;
+this.lastUpdateTime=lastUpdateTime;
+
+this.uris=uris;
+this.publicSettings=publicSettings;
+this.primaryModule=primaryModule;
+this.location=location;
+
+
+}
+}
+
+public class Uris {
+public String details;
+public String overview;
+public String site_image;
+public String data_period;
+
+public Uris() {
+
+}
+}
+
+public class PublicSettings {
+public Boolean isPublic;
+}
+
+public class PrimaryModule {
+public String modelName;
+public String manufacturerName;
+public Integer maximumPower;
+
+public PrimaryModule() {
+
+}
+}
+
+public class Location {
+public String country;
+public String address;
+public String city;
+public String address2;
+public String countryCode;
+public String timeZone;
+
+public Location() {
+
+}
+}
+
+public String sites;
+public ArrayList<Site> site;
+public Integer count;
+
+public Sites() {
+
+}
+}
