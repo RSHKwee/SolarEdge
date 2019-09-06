@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.jsoniter.annotation.JsonCreator;
 import com.jsoniter.annotation.JsonProperty;
+import com.jsoniter.annotation.JsonWrapper;
 
 //@formatter:off
 /**
@@ -14,103 +15,51 @@ import com.jsoniter.annotation.JsonProperty;
  * https://monitoringapi.solaredge.com/sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC&api
  * key=L4QLV Q1LOKCQX2193VSEICXW61NP6B1O
  * 
- * · id - the site ID 
- * · name - the site name 
- * · account id -the account this site belongs to 
- * · status - the site status (see Site Status on page 53) 
- * · peak power - site peak power · CURRENCY 
- * · installationDate – site installation date (format: yyyy-MM-DD hh:mm:ss ) 
- * · ptoDate – permission to operate date 
- * · notes 
- * · type – site type (see Site Type on page 53) 
- * · location - includes country, state, city, address, secondary address, time zone and zip 
- * · alertQuantity - number of open alerts in this site 
- * · alertSeverity - the highest alert severity in this site
- * · publicSettings - includes if this site is public and its public name
+ * · id - the site ID · name - the site name · account id -the account this site
+ * belongs to · status - the site status (see Site Status on page 53) · peak
+ * power - site peak power · CURRENCY · installationDate – site installation
+ * date (format: yyyy-MM-DD hh:mm:ss ) · ptoDate – permission to operate date ·
+ * notes · type – site type (see Site Type on page 53) · location - includes
+ * country, state, city, address, secondary address, time zone and zip ·
+ * alertQuantity - number of open alerts in this site · alertSeverity - the
+ * highest alert severity in this site · publicSettings - includes if this site
+ * is public and its public name
  * 
- * Example: 
- * JSON output: 
- * { "Sites":
- *   { "count":1567, 
- *     "list":[
- *        { "id":1,
- *          "name":"Test", 
- *          "accountId":0, 
- *          "status":"Active", 
- *          "peakPower":10.0,
- *          "currency":"EUR", 
- *          "installationDate":"2012-06-08 00:00:00", 
- *          “ptoDate”: “2017-05-11”, 
- *          "notes":"test notes", 
- *          "type":"Optimizers & Inverters",
- *          "location":{ 
- *             "country":"the country", 
- *             "state":"the state", 
- *             "city":"the city",
- *             "address":"the address", 
- *             "address2":"the address2", 
- *             "zip":"00000",
- *             "timeZone":"GMT" 
- *          }, 
- *          "alertQuantity":0, 
- *          "alertSeverity":"NONE", 
- *          "uris":{
- *            "PUBLIC_URL":"the public URL name", 
- *            "IMAGE_URI":"the site image link" 
- *          },
- *          "publicSettings":{ 
- *            "name":"the public name", 
- *            "isPublic":true 
- *          } 
- *        },
+ * Example: JSON output: { "Sites": { "count":1567, "list":[ { "id":1,
+ * "name":"Test", "accountId":0, "status":"Active", "peakPower":10.0,
+ * "currency":"EUR", "installationDate":"2012-06-08 00:00:00", “ptoDate”:
+ * “2017-05-11”, "notes":"test notes", "type":"Optimizers & Inverters",
+ * "location":{ "country":"the country", "state":"the state", "city":"the city",
+ * "address":"the address", "address2":"the address2", "zip":"00000",
+ * "timeZone":"GMT" }, "alertQuantity":0, "alertSeverity":"NONE", "uris":{
+ * "PUBLIC_URL":"the public URL name", "IMAGE_URI":"the site image link" },
+ * "publicSettings":{ "name":"the public name", "isPublic":true } },
  * 
- * Data example:
- * {"sites":{
- *    "site":[{
- *       "notes":"",
- *       "installationDate":"2014-07-01",
- *       "type":"Optimizers & Inverters",
- *       "accountId":2849,
- *       "ptoDate":null,
- *       "uris":{
- *          "DETAILS":"/site/62137/details",
- *          "OVERVIEW":"/site/62137/overview",
- *          "SITE_IMAGE":"/site/62137/siteImage/IMG-20140701-WA0006.jpg",
- *          "DATA_PERIOD":"/site/62137/dataPeriod"
- *       },
- *       "peakPower":6.13,
- *       "publicSettings":{
- *          "isPublic":false
- *       },
- *       "name":"René Kwee",
- *       "primaryModule":{
- *          "modelName":"X21.345",
- *          "manufacturerName":"SunPower",
- *          "maximumPower":345
- *       },
- *       "currency":"EUR",
- *       "location": {
- *         "zip":"3871 TP",
- *         "country":"Netherlands",
- *         "address":"van Dedemlaan 13",
- *         "city":"Hoevelaken",
- *         "address2":"",
- *         "countryCode":"NL",
- *         "timeZone":"Europe/Amsterdam"
- *       },
- *       "id":62137,
- *       "status":"Active",
- *       "lastUpdateTime":"2019-08-11"
- *    }],
- *    "count":1
- *  }}
+ * Data example: {"sites":{ "site":[{ "notes":"",
+ * "installationDate":"2014-07-01", "type":"Optimizers & Inverters",
+ * "accountId":2849, "ptoDate":null, "uris":{ "DETAILS":"/site/62137/details",
+ * "OVERVIEW":"/site/62137/overview",
+ * "SITE_IMAGE":"/site/62137/siteImage/IMG-20140701-WA0006.jpg",
+ * "DATA_PERIOD":"/site/62137/dataPeriod" }, "peakPower":6.13,
+ * "publicSettings":{ "isPublic":false }, "name":"René Kwee", "primaryModule":{
+ * "modelName":"X21.345", "manufacturerName":"SunPower", "maximumPower":345 },
+ * "currency":"EUR", "location": { "zip":"3871 TP", "country":"Netherlands",
+ * "address":"van Dedemlaan 13", "city":"Hoevelaken", "address2":"",
+ * "countryCode":"NL", "timeZone":"Europe/Amsterdam" }, "id":62137,
+ * "status":"Active", "lastUpdateTime":"2019-08-11" }], "count":1 }}
  *
  * @author René
  * 
  */
-//@formatter:on
+// @formatter:on
 
 public class Sites {
+
+	private ArrayList<Site> site = new ArrayList<Site>();
+	private Integer count = 0;
+
+	public String example = "{\"sites\":{\"site\":[{\"notes\":\"\",installationDate:\"2014-07-01\",type:\"Optimizers & Inverters\",accountId:2849,ptoDate:null,uris:{\"DETAILS\":\"/site/62137/details\",OVERVIEW:\"/site/62137/overview\",SITE_IMAGE:\"/site/62137/siteImage/IMG-20140701-WA0006.jpg\",DATA_PERIOD:\"/site/62137/dataPeriod\"},peakPower:6.13,publicSettings:{\"isPublic\":false},name:\"René Kwee\",primaryModule:{\"modelName\":\"X21.345\",manufacturerName:\"SunPower\",maximumPower:345},currency:\"EUR\",location:{\"zip\":\"3871 TP\",country:\"Netherlands\",address:\"van Dedemlaan 13\",city:\"Hoevelaken\",address2:\"\",countryCode:\"NL\",timeZone:\"Europe/Amsterdam\"},id:62137,status:\"Active\",lastUpdateTime:\"2019-08-07\"}],count:1}}";
+
 	public class Site {
 		private Integer id;
 		private String notes;
@@ -128,9 +77,6 @@ public class Sites {
 		private PublicSettings publicSettings;
 		private PrimaryModule primaryModule;
 		private Location location;
-
-		private ArrayList<Site> site;
-		private Integer count;
 
 		public Integer getId() {
 			return id;
@@ -256,16 +202,8 @@ public class Sites {
 			return site;
 		}
 
-		public void setSite(ArrayList<Site> site) {
-			this.site = site;
-		}
-
 		public Integer getCount() {
 			return count;
-		}
-
-		public void setCount(Integer count) {
-			this.count = count;
 		}
 
 		@JsonCreator
@@ -453,6 +391,7 @@ public class Sites {
 			this.timeZone = timeZone;
 		}
 
+		@JsonCreator
 		public Location(@JsonProperty("country") String country, @JsonProperty("address") String address,
 		    @JsonProperty("city") String city, @JsonProperty("address2") String address2,
 		    @JsonProperty("countryCode") String countryCode, @JsonProperty("timeZone") String timeZone) {
@@ -463,6 +402,7 @@ public class Sites {
 			this.countryCode = countryCode;
 			this.timeZone = timeZone;
 		}
+
 	}
 
 	public Sites(Integer id, String notes, String installationDate, String type, Integer accountId, String ptoDate,
@@ -473,4 +413,23 @@ public class Sites {
 	    ArrayList<Site> site, Integer count) {
 
 	}
+
+	@JsonWrapper
+	public void setSite(@JsonProperty("ïd") Integer id, @JsonProperty("notes") String notes,
+	    @JsonProperty("installationDate") String installationDate, @JsonProperty("type") String type,
+	    @JsonProperty("accountId") Integer accountId, @JsonProperty("ptoDate") String ptoDate,
+	    @JsonProperty("name") String name, @JsonProperty("currency") String currency,
+	    @JsonProperty("peakPower") Double peakPower, @JsonProperty("status") String status,
+	    @JsonProperty("lastUpdateTime") String lastUpdateTime,
+
+	    @JsonProperty("uris") Uris uris, @JsonProperty("publicSettings") PublicSettings publicSettings,
+	    @JsonProperty("primaryModule") PrimaryModule primaryModule, @JsonProperty("location") Location location) {
+		Site l_site = new Site(id, notes, installationDate, type, accountId, ptoDate, name, currency, peakPower, status,
+		    lastUpdateTime,
+
+		    uris, publicSettings, primaryModule, location);
+		this.site.add(l_site);
+		this.count++;
+	}
+
 }

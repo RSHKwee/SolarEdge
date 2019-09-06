@@ -1,0 +1,84 @@
+Site List
+
+URL: /sites/list
+Example URL (with all options):
+https://monitoringapi.solaredge.com/sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC&api key=L4QLV Q1LOKCQX2193VSEICXW61NP6B1O 
+
+·	id - the site ID
+·	name - the site name
+·	account id -the account this site belongs to
+·	status - the site status (see Site Status on page 53)
+·	peak power - site peak power
+·	CURRENCY
+·	installationDate – site installation date (format: yyyy-MM-DD hh:mm:ss )
+·	ptoDate – permission to operate date
+·	notes
+·	type – site type (see Site Type on page 53)
+·	location - includes country, state, city, address, secondary address, time zone and zip
+·	alertQuantity - number of open alerts in this site *
+·	alertSeverity - the highest alert severity in this site *
+·	publicSettings - includes if this site is public and its public name
+
+Example: JSON output:
+{
+"Sites":{
+"count":1567,
+"list":[{
+"id":1,
+"name":"Test",
+"accountId":0,
+"status":"Active",
+"peakPower":10.0,
+"currency":"EUR",
+"installationDate":"2012-06-08 00:00:00",
+“ptoDate”: “2017-05-11”,
+"notes":"test notes",
+"type":"Optimizers & Inverters",
+"location":{
+"country":"the country",
+"state":"the state",
+"city":"the city",
+"address":"the address",
+"address2":"the address2",
+"zip":"00000",
+"timeZone":"GMT"
+},
+"alertQuantity":0,
+"alertSeverity":"NONE",
+"uris":{
+"PUBLIC_URL":"the public URL name",
+"IMAGE_URI":"the site image link"
+},
+"publicSettings":{
+"name":"the public name",
+"isPublic":true
+}
+},
+
+==========================================================================================================
+Site Details
+
+
+
+Site Data: Start and End Dates	 12
+Site Data: Bulk Version	 13
+Site Energy	 13
+Site Energy: Bulk Version 	 14
+Site Energy – Time Period	 15
+Site Energy – Time Period: Bulk Version	 16
+Site Power	16
+Site Power: Bulk version 	 18
+Site Overview	 19
+Site Overview: Bulk Version 	 20
+Site Power - Detailed 	 21
+Site Energy - Detailed	 23
+Site Power Flow	24
+Storage Information	26
+Site Image	28
+Site Environmental Benefits	 29
+Installer Logo Image	30
+Site Equipment API 	 31
+Components List 	 31
+Inventory	 32
+Inverter Technical Data	 35
+Equipment Change Log	39

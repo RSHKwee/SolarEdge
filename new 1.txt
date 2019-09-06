@@ -1,4 +1,4 @@
-list":[{
+"list":[{
 "id":1,
 "name":"Test",
 "accountId":0,
