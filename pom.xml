@@ -27,9 +27,14 @@
 	  <version>20180813</version>
 	</dependency>
 	<dependency>
-    <groupId>com.jsoniter</groupId>
-    <artifactId>jsoniter</artifactId>
-    <version>0.9.8</version>
-</dependency>
+      <groupId>com.jsoniter</groupId>
+      <artifactId>jsoniter</artifactId>
+      <version>0.9.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.3.1</version>
+    </dependency>
   </dependencies>
 </project>
