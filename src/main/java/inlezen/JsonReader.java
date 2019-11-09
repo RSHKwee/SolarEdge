@@ -113,7 +113,12 @@ public class JsonReader {
 		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/power?startTime=2015-07-01%2000:01:00"
 		    + "&endTime=2015-07-05%2023:59:00" + "&" + v_apikey);
 		System.out.println(json.toString());
-
+    JSONObject v_power = new JSONObject (json.get("power"));
+    System.out.println(v_power.toString());
+    JSONObject v_values = new JSONObject(v_power.get("values"));
+    System.out.println(v_values.toString());
+   
+	/*	
 		JSONArray ja = new JSONArray();
 		ja.put(json.get("power"));
 
@@ -123,6 +128,6 @@ public class JsonReader {
 		// l_any = JsonIterator.deserialize(json.get("power").toString());
 		l_any = JsonIterator.deserialize(power_example);
 		System.out.println(json.toString());
-
+*/
 	}
 }
