@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -84,7 +85,8 @@ public class JsonReader {
 		 */
 		String l_jsonSites = json.get("sites").toString();
 		Any l_any = JsonIterator.deserialize(json.get("sites").toString());
-
+    Any l_anySite = l_any.get("site");
+    List<Any> l_anyNote = l_anySite.asList();
 		v_mapObj = Utility.jsonToMap(json);
 		v_mapObj2 = Utility.jsonToMap(json.get("sites"));
 		v_mapObj3 = Utility.jsonToMap(json.get("sites"));
@@ -113,12 +115,27 @@ public class JsonReader {
 		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/power?startTime=2015-07-01%2000:01:00"
 		    + "&endTime=2015-07-05%2023:59:00" + "&" + v_apikey);
 		System.out.println(json.toString());
+		
+		Any l_power = JsonIterator.deserialize(json.get("power").toString());
+		Any l_value = l_power.get("values");
+    List<Any> l_anyValues = l_value.asList();
+    l_anyValues.forEach(l_anyvalue ->{
+    	try {
+    	String v_date =  l_anyvalue.get("date").toString();
+    	String v_value = l_anyvalue.get("value").toString();
+    	System.out.println(l_anyvalue.toString());
+    	System.out.println(" Datum:" + v_date + " Waarde:" + v_value);
+    	} catch (Exception e) {
+    		System.out.println(e.toString());
+    	}
+    });
+  	/*    
     JSONObject v_power = new JSONObject (json.get("power"));
     System.out.println(v_power.toString());
-    JSONObject v_values = new JSONObject(v_power.get("values"));
+    JSONObject v_values = new JSONObject(json.get("values"));
     System.out.println(v_values.toString());
    
-	/*	
+	
 		JSONArray ja = new JSONArray();
 		ja.put(json.get("power"));
 
