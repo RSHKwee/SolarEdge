@@ -99,22 +99,15 @@ public class JsonReader {
 		// dataTypen.Sites.Site.class);
 
 		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/details.json?" + "&" + v_apikey);
-		System.out.println(json.toString());
+		System.out.println("Details: " +  json.toString());
 
 		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/timeFrameEnergy?startDate=" + v_startDate
 		    + "&endDate=" + v_endDate + "&" + v_apikey);
-		System.out.println(json.toString());
-
-		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/timeFrameEnergy?startDate=" + v_startDate1
-		    + "&endDate=" + v_endDate1 + "&" + v_apikey);
-		System.out.println(json.toString());
-
-		v_mapObj = Utility.jsonToMap(json);
-		System.out.println("v_mapObj: " + v_mapObj.toString());
+		System.out.println("Time Frame Energy: " + json.toString());
 
 		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/power?startTime=2015-07-01%2000:01:00"
 		    + "&endTime=2015-07-05%2023:59:00" + "&" + v_apikey);
-		System.out.println(json.toString());
+		System.out.println("Power: " + json.toString());
 		
 		Any l_power = JsonIterator.deserialize(json.get("power").toString());
 		Any l_value = l_power.get("values");
