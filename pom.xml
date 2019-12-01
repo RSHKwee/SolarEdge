@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>solarEdgeHoevelaken</groupId>
-  <artifactId>inlezen</artifactId>
+  <artifactId>solaredge</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>inlezen</name>
+  <name>solaredge</name>
   <url>http://maven.apache.org</url>
 
   <properties>
