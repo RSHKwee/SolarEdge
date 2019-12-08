@@ -1,7 +1,13 @@
 package dataTypen;
 
+import java.util.List;
+
+import org.json.JSONObject;
+
+import com.jsoniter.JsonIterator;
 import com.jsoniter.annotation.JsonCreator;
 import com.jsoniter.annotation.JsonProperty;
+import com.jsoniter.any.Any;
 
 //@formatter:off
 /**
@@ -74,35 +80,21 @@ import com.jsoniter.annotation.JsonProperty;
 public class Power {
 	private String measuredBy;
 	private String timeUnit;
-	private Values values;
 
-	public class Values {
-		private Value[] value;
-
-		@JsonCreator
-		public Values(@JsonProperty("values") Value[] value) {
-			this.value = value;
-		}
-	}
-
-	public class Value {
-		private String date;
-		private String value;
-
-		@JsonCreator
-		public Value(@JsonProperty("date") String date, @JsonProperty("value") String value) {
-			this.date = date;
-			this.value = value;
-		}
-	}
-
-	@JsonCreator
-	public Power(@JsonProperty("measuredBy") String measuredBy, @JsonProperty("timeUnit") String timeUnit
-	// , @JsonProperty("values") Values values
-	) {
-		this.measuredBy = measuredBy;
-		this.timeUnit = timeUnit;
-		// this.values = values;
+	public void ReadPower(JSONObject a_json) {
+		Any l_power = JsonIterator.deserialize(a_json.get("power").toString());
+		Any l_value = l_power.get("values");
+		List<Any> l_anyValues = l_value.asList();
+		l_anyValues.forEach(l_anyvalue -> {
+			try {
+				String v_date = l_anyvalue.get("date").toString();
+				String v_value = l_anyvalue.get("value").toString();
+				System.out.println(l_anyvalue.toString());
+				System.out.println(" Datum:" + v_date + " Waarde:" + v_value);
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+		});
 	}
 
 }
