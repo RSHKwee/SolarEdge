@@ -6,8 +6,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.jsoniter.JsonIterator;
-import com.jsoniter.annotation.JsonCreator;
-import com.jsoniter.annotation.JsonProperty;
 import com.jsoniter.any.Any;
 
 //@formatter:off
@@ -33,10 +31,6 @@ import com.jsoniter.any.Any;
  * for that time. § Example: JSON output: { "power":{
  * "timeUnit":"QUARTER_OF_AN_HOUR", "unit":"W", "values":[{ "date":"2013-06-04
  * 11:00:00", "value":7987.03 },
- * 
- * 
- * 
- * 
  * 
  * {"power": {"unit":"W", "values":[{"date":"2015-07-01 00:00:00",
  * "value":null}, {"date":"2015-07-01 00:15:00", "value":null},
