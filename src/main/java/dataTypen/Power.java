@@ -6,8 +6,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.jsoniter.JsonIterator;
-import com.jsoniter.annotation.JsonCreator;
-import com.jsoniter.annotation.JsonProperty;
 import com.jsoniter.any.Any;
 
 //@formatter:off
