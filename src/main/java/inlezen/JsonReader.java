@@ -111,11 +111,15 @@ public class JsonReader {
 		
 		Any l_power = JsonIterator.deserialize(json.get("power").toString());
 		Any l_value = l_power.get("values");
+		Any v_unit = l_power.get("unit");
+		Any v_measured = l_power.get("measuredBy");
+		Any v_timeUnit = l_power.get("timeUnit");
+		
     List<Any> l_anyValues = l_value.asList();
     l_anyValues.forEach(l_anyvalue ->{
     	try {
     	String v_date =  l_anyvalue.get("date").toString();
-    	String v_value = l_anyvalue.get("value").toString();
+    	double v_value = l_anyvalue.get("value").toDouble() ;
     	System.out.println(l_anyvalue.toString());
     	System.out.println(" Datum:" + v_date + " Waarde:" + v_value);
     	} catch (Exception e) {

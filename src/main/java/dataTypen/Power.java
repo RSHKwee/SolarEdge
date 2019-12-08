@@ -1,5 +1,6 @@
 package dataTypen;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -80,21 +81,67 @@ import com.jsoniter.any.Any;
 public class Power {
 	private String measuredBy;
 	private String timeUnit;
+	private String unit;
+	private ArrayList<Value> values = new ArrayList<Value>();
 
 	public void ReadPower(JSONObject a_json) {
 		Any l_power = JsonIterator.deserialize(a_json.get("power").toString());
-		Any l_value = l_power.get("values");
-		List<Any> l_anyValues = l_value.asList();
+
+		Any v_unit = l_power.get("unit");
+		Any v_measured = l_power.get("measuredBy");
+		Any v_timeUnit = l_power.get("timeUnit");
+		Any l_values = l_power.get("values");
+
+		unit = v_unit.toString();
+		measuredBy = v_measured.toString();
+		timeUnit = v_timeUnit.toString();
+		values.clear();
+
+		List<Any> l_anyValues = l_values.asList();
 		l_anyValues.forEach(l_anyvalue -> {
 			try {
 				String v_date = l_anyvalue.get("date").toString();
-				String v_value = l_anyvalue.get("value").toString();
-				System.out.println(l_anyvalue.toString());
-				System.out.println(" Datum:" + v_date + " Waarde:" + v_value);
+				double v_value = l_anyvalue.get("value").toDouble();
+
+				Value vv_value = new Value(v_date, v_value);
+				values.add(vv_value);
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
 		});
 	}
 
+	public String getUnit() {
+		return unit;
+	}
+
+	public String getMeasuredBy() {
+		return measuredBy;
+	}
+
+	public String getTimeUnit() {
+		return timeUnit;
+	}
+
+	public ArrayList<Value> getValues() {
+		return values;
+	}
+
+	public class Value {
+		private String date;
+		private double value;
+
+		public Value(String a_date, double a_value) {
+			date = a_date;
+			value = a_value;
+		}
+
+		public double getValue() {
+			return value;
+		}
+
+		public String getDate() {
+			return date;
+		}
+	}
 }
