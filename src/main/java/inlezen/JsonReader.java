@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,9 @@ import org.json.JSONObject;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 
+import dataTypen.Power;
 import dataTypen.Sites;
+import dataTypen.Power.Value;
 
 public class JsonReader {
 
@@ -45,6 +48,8 @@ public class JsonReader {
 
 	public static void main(String[] args) throws IOException, JSONException {
 		String v_apikey = "api_key=ZSFYC1HPDSUXQH6KCDKSUJTFDGW884LE";
+		String v_apikeykaal = "ZSFYC1HPDSUXQH6KCDKSUJTFDGW884LE";
+
 		String v_SolarEdgeUrl = "https://monitoringapi.solaredge.com";
 		String v_listSites = "sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC";
 		String v_siteId = "62137";
@@ -56,6 +61,7 @@ public class JsonReader {
 		Map<String, Object> v_mapObj2 = new HashMap<String, Object>();
 		Map<String, Object> v_mapObj3 = new HashMap<String, Object>();
 
+		Berichten bericht = new Berichten(v_apikeykaal, v_siteId);
 		JSONObject json = readJsonFromUrl(
 		    "https://monitoringapi.solaredge.com/sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC&api_key=ZSFYC1HPDSUXQH6KCDKSUJTFDGW884LE");
 		System.out.println(json.toString());
@@ -105,28 +111,19 @@ public class JsonReader {
 		    + "&endDate=" + v_endDate + "&" + v_apikey);
 		System.out.println("Time Frame Energy: " + json.toString());
 
-		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/power?startTime=2015-07-01%2000:01:00"
-		    + "&endTime=2015-07-05%2023:59:00" + "&" + v_apikey);
-
+		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/power?startTime=2019-12-01%2000:01:00"
+		    + "&endTime=2019-12-05%2023:59:00" + "&" + v_apikey);
 		System.out.println("Power: " + json.toString());
 
-		Any l_power = JsonIterator.deserialize(json.get("power").toString());
-		Any l_value = l_power.get("values");
-		Any v_unit = l_power.get("unit");
-		Any v_measured = l_power.get("measuredBy");
-		Any v_timeUnit = l_power.get("timeUnit");
-
-		List<Any> l_anyValues = l_value.asList();
-		l_anyValues.forEach(l_anyvalue -> {
-			try {
-				String v_date = l_anyvalue.get("date").toString();
-				double v_value = l_anyvalue.get("value").toDouble();
-				System.out.println(l_anyvalue.toString());
-				System.out.println(" Datum:" + v_date + " Waarde:" + v_value);
-			} catch (Exception e) {
-				System.out.println(e.toString());
-			}
-		});
-
+		Power power = new Power();
+		power.ReadPower(bericht.getPower("2019-12-01", "2019-12-05"));
+		ArrayList<Value> values = new ArrayList<Value>();
+		values = power.getValues();
+		/*
+		 * values.forEach(value -> { try { String v_date = value.getDate(); double
+		 * v_value = value.getValue(); System.out.println(" Datum:" + v_date +
+		 * " Waarde:" + v_value); } catch (Exception e) {
+		 * System.out.println(e.toString()); } });
+		 */
 	}
 }

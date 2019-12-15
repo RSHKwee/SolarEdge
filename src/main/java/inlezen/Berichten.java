@@ -53,8 +53,8 @@ public class Berichten {
 	public JSONObject getPower(String a_StartDate, String a_EndDate) {
 		JSONObject json = null;
 		try {
-			json = readJsonFromUrl(m_SolarEdgeUrl + "/site/" + m_siteId + "/power?startTime=" + a_StartDate + "%2000:00:01"
-			    + "&endTime=" + a_EndDate + "%2023:59:59" + "&api_key=" + m_apikey);
+			json = readJsonFromUrl(m_SolarEdgeUrl + "/site/" + m_siteId + "/power?startTime=" + a_StartDate + "%2000:01:00"
+			    + "&endTime=" + a_EndDate + "%2023:59:00" + "&api_key=" + m_apikey);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
