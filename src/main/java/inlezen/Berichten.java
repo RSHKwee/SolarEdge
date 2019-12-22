@@ -83,7 +83,7 @@ public class Berichten {
 	public JSONObject getSiteDetails() {
 		JSONObject json = null;
 		try {
-			json = readJsonFromUrl(m_SolarEdgeUrl + "/site/" + m_siteId + "/details.json?" + "&api_key=" + m_apikey);
+			json = readJsonFromUrl(m_SolarEdgeUrl + "/site/" + m_siteId + "/details.json?&api_key=" + m_apikey);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,10 +102,9 @@ public class Berichten {
 	 *          yyyy-mm-dd
 	 * @return
 	 */
-	public JSONObject gettimeFrameEnergy(String a_StartDate, String a_EndDate) {
+	public JSONObject getTimeFrameEnergy(String a_StartDate, String a_EndDate) {
 		JSONObject json = null;
 		try {
-			json = readJsonFromUrl(m_SolarEdgeUrl + "/site/" + m_siteId + "/details.json?" + "&api_key=" + m_apikey);
 			json = readJsonFromUrl(m_SolarEdgeUrl + "/site/" + m_siteId + "/timeFrameEnergy?startDate=" + a_StartDate
 			    + "&endDate=" + a_EndDate + "&api_key=" + m_apikey);
 		} catch (JSONException e) {

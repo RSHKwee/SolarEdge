@@ -21,6 +21,8 @@ import com.jsoniter.any.Any;
 
 import dataTypen.Power;
 import dataTypen.Sites;
+import dataTypen.TimeFrameEnergy;
+import dataTypen.TimeFrameEnergy.EnergyValue;
 import dataTypen.Power.Value;
 
 public class JsonReader {
@@ -107,18 +109,16 @@ public class JsonReader {
 		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/details.json?" + "&" + v_apikey);
 		System.out.println("Details: " + json.toString());
 
-		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/timeFrameEnergy?startDate=" + v_startDate
-		    + "&endDate=" + v_endDate + "&" + v_apikey);
-		System.out.println("Time Frame Energy: " + json.toString());
-
-		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/power?startTime=2019-12-01%2000:01:00"
-		    + "&endTime=2019-12-05%2023:59:00" + "&" + v_apikey);
-		System.out.println("Power: " + json.toString());
+		TimeFrameEnergy timeframe = new TimeFrameEnergy();
+		timeframe.ReadTimeFrameEnergy(bericht.getTimeFrameEnergy(v_startDate, v_endDate));
+		EnergyValue StartValue = timeframe.getStartValue();
+		EnergyValue EndValue = timeframe.getEndValue();
 
 		Power power = new Power();
 		power.ReadPower(bericht.getPower("2019-12-01", "2019-12-05"));
 		ArrayList<Value> values = new ArrayList<Value>();
 		values = power.getValues();
+
 		/*
 		 * values.forEach(value -> { try { String v_date = value.getDate(); double
 		 * v_value = value.getValue(); System.out.println(" Datum:" + v_date +
