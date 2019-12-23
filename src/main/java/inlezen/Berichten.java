@@ -69,7 +69,7 @@ public class Berichten {
 		JSONObject json = null;
 		try {
 			json = readJsonFromUrl(
-			    m_SolarEdgeUrl + "sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC&api_key=" + m_apikey);
+			    m_SolarEdgeUrl + "/sites/list?size=5&searchText=Lyon&sortProperty=name&sortOrder=ASC&api_key=" + m_apikey);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

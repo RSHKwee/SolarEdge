@@ -20,10 +20,12 @@ import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 
 import dataTypen.Power;
-import dataTypen.Sites;
+
 import dataTypen.TimeFrameEnergy;
 import dataTypen.TimeFrameEnergy.EnergyValue;
 import dataTypen.Power.Value;
+import dataTypen.SiteDetails;
+import dataTypen.Sites;
 
 public class JsonReader {
 
@@ -102,12 +104,11 @@ public class JsonReader {
 		System.out.println("v_mapObj: " + v_mapObj.toString());
 		System.out.println("v_mapObj2: " + v_mapObj2.toString());
 
-		// dataTypen.Sites.Site Site =
-		// JsonIterator.deserialize(json.get("sites").toString(),
-		// dataTypen.Sites.Site.class);
+		Sites sites = new Sites();
+		sites.ReadSites(bericht.getSites());
 
-		json = readJsonFromUrl(v_SolarEdgeUrl + "/site/" + v_siteId + "/details.json?" + "&" + v_apikey);
-		System.out.println("Details: " + json.toString());
+		SiteDetails site = new SiteDetails();
+		site.ReadSiteDetails(bericht.getSiteDetails());
 
 		TimeFrameEnergy timeframe = new TimeFrameEnergy();
 		timeframe.ReadTimeFrameEnergy(bericht.getTimeFrameEnergy(v_startDate, v_endDate));

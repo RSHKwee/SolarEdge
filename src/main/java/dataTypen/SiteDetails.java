@@ -11,6 +11,7 @@ import com.jsoniter.any.Any;
  * URL: /site/{siteId}/dataPeriod Example URL:
  * https://monitoringapi.solaredge.com/site/1/dataPeriod?apikey=L4QLVQ1LOKCQX2193VSEICXW61NP6B1O
  * 
+ * {"sites":
  * {"site":[
  *   {
  *     "notes":"",
@@ -59,7 +60,7 @@ import com.jsoniter.any.Any;
  *
  */
 //@formatter:on
-public class Site {
+public class SiteDetails {
 	private String m_site;
 	private int m_count;
 
@@ -95,10 +96,12 @@ public class Site {
 	private String m_locationCountryCode;
 	private String m_locationTimeZone;
 
-	public void ReadSite(JSONObject a_json) {
-		Any l_site = JsonIterator.deserialize(a_json.get("site").toString());
-		Any l_count = JsonIterator.deserialize(a_json.get("count").toString());
+	public void ReadSiteDetails(JSONObject a_json) {
+		Any l_site = JsonIterator.deserialize(a_json.get("details").toString());
+		ReadSite(l_site);
+	}
 
+	public void ReadSite(Any l_site) {
 		Any v_notes = l_site.get("notes");
 		Any v_installationDate = l_site.get("installationDate");
 		Any v_type = l_site.get("type");
@@ -135,7 +138,6 @@ public class Site {
 		Any v_locationCountryCode = l_location.get("countryCode");
 		Any v_locationTimeZone = l_location.get("timeZone");
 		m_site = l_site.toString();
-		m_count = l_count.toInt();
 
 		m_notes = v_notes.toString();
 		m_installationDate = v_installationDate.toString();
