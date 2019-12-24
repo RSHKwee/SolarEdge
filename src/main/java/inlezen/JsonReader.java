@@ -23,6 +23,7 @@ import dataTypen.Power;
 
 import dataTypen.TimeFrameEnergy;
 import dataTypen.TimeFrameEnergy.EnergyValue;
+import library.Berichten;
 import dataTypen.Power.Value;
 import dataTypen.SiteDetails;
 import dataTypen.Sites;
@@ -76,30 +77,6 @@ public class JsonReader {
 		System.out.println(json.get("sites"));
 
 		JsonIterator iter = JsonIterator.parse(json.get("sites").toString());
-		// Sites l_sites = iter.read(Sites.class);
-		/*
-		 * int totalTagsCount = 0; for (String field = iter.readObject(); field != null;
-		 * field = iter.readObject()) { System.out.println("field: /" + field + "/"); if
-		 * (field.equals("site")) { while (iter.readArray()) { for (String field2 =
-		 * iter.readObject(); field2 != null; field2 = iter.readObject()) {
-		 * System.out.println("field2: /" + field2 + "/");
-		 * 
-		 * if (field2.equals("installationDate")) {
-		 * 
-		 * // JsonIterator vv = iter.parse(field2); // String vvv = vv.readObject(); //
-		 * Any ll_any = JsonIterator.deserialize(field2);
-		 * 
-		 * // while (iter.readArray()) { // String vv3 = iter.readObject(); //
-		 * System.out.println("vv3 :" + vv3); // totalTagsCount++; // } } else {
-		 * iter.skip(); } } } } else { iter.skip(); } }
-		 */
-		String l_jsonSites = json.get("sites").toString();
-		Any l_any = JsonIterator.deserialize(json.get("sites").toString());
-		Any l_anySite = l_any.get("site");
-		List<Any> l_anyNote = l_anySite.asList();
-		v_mapObj = Utility.jsonToMap(json);
-		v_mapObj2 = Utility.jsonToMap(json.get("sites"));
-		v_mapObj3 = Utility.jsonToMap(json.get("sites"));
 
 		System.out.println("v_mapObj: " + v_mapObj.toString());
 		System.out.println("v_mapObj2: " + v_mapObj2.toString());
